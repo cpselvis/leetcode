@@ -1,5 +1,5 @@
 /**
- * Sum Root to Leaf Numbers
+ * Path Sum
  *
  * cpselvis(cpselvis@gmail.com)
  * September 7th, 2016
@@ -16,27 +16,27 @@ struct TreeNode {
   TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-
 class Solution {
 public:
-  int sumNumbers(TreeNode* root) {
-    vector<int> nums;
-    int ret = 0;
-
+  bool hasPathSum(TreeNode* root, int sum) {
     if (root == NULL)
     {
-      return ret;
+      return false;
     }
+    vector<int> nums;
     dfs(root, nums, 0);
     for (auto i : nums)
     {
-      ret += i;
+      if (sum == i)
+      {
+        return true;
+      }
     }
-    return ret;
+    return false;
   }
   void dfs(TreeNode *root, vector<int> &nums, int num)
   {
-    num = num * 10 + root -> val;
+    num = num + root -> val;
     if (root -> left != NULL)
     {
       dfs(root -> left, nums, num);
@@ -54,11 +54,9 @@ public:
 
 int main(int argc, char **argv)
 {
-  TreeNode *root;
-  //  TreeNode *root = new TreeNode(1);
-  //  root -> left = new TreeNode(0);
-  //  root -> right = new TreeNode(3);
+  TreeNode *root = new TreeNode(1);
+  root -> left = new TreeNode(2);
 
   Solution s;
-  cout << s.sumNumbers(root) << endl;
+  cout << s.hasPathSum(root, 3) << endl;
 }
