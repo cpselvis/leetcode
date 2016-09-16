@@ -13,6 +13,11 @@ public:
   bool isUgly(int num) {
     int arr[3] = {2, 3, 5};
 
+    if (num <= 0)
+    {
+      return false;
+    }
+    
     for (auto i : arr)
     {
       while (num % i == 0)
